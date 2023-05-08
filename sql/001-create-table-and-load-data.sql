@@ -1,11 +1,10 @@
-DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS names;
 
-CREATE TABLE movies (
+CREATE TABLE names (
   id int unsigned AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  director VARCHAR(100) NOT NULL,
+  name VARCHAR(20) NOT NULL,
   PRIMARY KEY(id)
 );
 
-INSERT INTO movies (name, director) VALUES ("ショーシャンクの空に", "フランク・ダラボン");
-INSERT INTO movies (name, director) VALUES ("この世界の片隅に", "片渕須直");
+INSERT INTO names (id,name) VALUES (1, "tanaka");
+INSERT INTO names (id,name) VALUES (2, "yamada");
