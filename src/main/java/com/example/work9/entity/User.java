@@ -1,10 +1,10 @@
-package entity;
+package com.example.work9.entity;
 
-public class Name {
+public class User {
     private int id;
     private String name;
 
-    public Name(int id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -16,4 +16,5 @@ public class Name {
     public String getName() {
         return name;
     }
+
 }

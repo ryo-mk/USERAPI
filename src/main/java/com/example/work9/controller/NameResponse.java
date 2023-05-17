@@ -1,15 +1,15 @@
-package controller;
+package com.example.work9.controller;
 
-import entity.Name;
+import com.example.work9.entity.User;
 
 public class NameResponse {
     private int id;
     private String name;
 
     // Name NameResponse
-    public NameResponse(Name name) {
-        this.id = name.getId();
-        this.name = name.getName();
+    public NameResponse(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
     }
 
     public int getId() {
