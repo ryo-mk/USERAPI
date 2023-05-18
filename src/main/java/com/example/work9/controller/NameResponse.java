@@ -6,7 +6,6 @@ public class NameResponse {
     private int id;
     private String name;
 
-    // Name NameResponse
     public NameResponse(User user) {
         this.id = user.getId();
         this.name = user.getName();
