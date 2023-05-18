@@ -1,6 +1,7 @@
 package com.example.work9.service;
 
 import com.example.work9.entity.User;
+import com.example.work9.exception.ResourceNotFoundException;
 import com.example.work9.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(int id) throws Exception {
-        return userMapper.findById(id);
+    public User findUser(int id) {
+        Optional<User> user = this.userMapper.findById(id);
+        return user.orElseThrow(() -> new ResourceNotFoundException("id:" + id + ",resource not found"));
     }
 
     @Override
