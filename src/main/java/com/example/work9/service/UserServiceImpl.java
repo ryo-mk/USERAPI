@@ -2,7 +2,6 @@ package com.example.work9.service;
 
 import com.example.work9.entity.User;
 import com.example.work9.exception.ResourceNotFoundException;
-import com.example.work9.form.CreateForm;
 import com.example.work9.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(CreateForm form) {
-        User user = new User(form.getName());
+    public User createUser(String createUserName) {
+        User user = new User(createUserName);
         userMapper.createUser(user);
         return user;
     }
