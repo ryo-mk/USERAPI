@@ -9,8 +9,7 @@ public interface UserService {
 
     User findUser(int id);
 
-    // User createUser(CreateForm form);
-    User createUser(String createUserName);
+    User createUser(String getName);
 
     void update(int id, String name) throws Exception;
 }

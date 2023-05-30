@@ -11,8 +11,4 @@ public class CreateForm {
     public String getName() {
         return name;
     }
-
-    public String createUserName() {
-        return name;
-    }
 }

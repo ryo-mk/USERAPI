@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(String createUserName) {
-        User user = new User(createUserName);
+    public User createUser(String getName) {
+        User user = new User(getName);
         userMapper.createUser(user);
         return user;
     }
