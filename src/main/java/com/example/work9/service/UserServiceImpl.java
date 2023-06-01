@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(int id, String getName) {
-        User user = new User(id, getName);
-        userMapper.updateUser(user);
+    public User updateUser(int id, String name) {
         User findUser = findUser(id);
         if (findUser == null) {
             return findUser;
         }
+        User user = new User(id, name);
+        userMapper.updateUser(user);
         return user;
     }
 }
