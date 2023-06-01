@@ -35,7 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(int id, String name) throws Exception {
-
+    public User updateUser(int id, String getName) {
+        User user = new User(id, getName);
+        userMapper.updateUser(user);
+        User findUser = findUser(id);
+        if (findUser == null) {
+            return findUser;
+        }
+        return user;
     }
 }

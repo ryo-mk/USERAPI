@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,5 +22,7 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createUser(User user);
 
-    
+    @Update("UPDATE names SET name = #{name} WHERE id = #{id}")
+    void updateUser(User user);
+
 }
