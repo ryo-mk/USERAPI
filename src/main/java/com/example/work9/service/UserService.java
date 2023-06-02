@@ -11,5 +11,5 @@ public interface UserService {
 
     User createUser(String getName);
 
-    void update(int id, String name) throws Exception;
+    User updateUser(int id, String name);
 }
