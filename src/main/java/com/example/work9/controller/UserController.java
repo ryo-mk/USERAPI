@@ -6,6 +6,7 @@ import com.example.work9.form.UpdateForm;
 import com.example.work9.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,5 +53,11 @@ public class UserController {
             @PathVariable("id") int id, @RequestBody @Validated UpdateForm form) {
         User user = userService.updateUser(id, form.getName());
         return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Map<String, String>> delete(@PathVariable("id") int id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok(Map.of("message", "successfully deleted user with id : " + id));
     }
 }
