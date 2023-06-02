@@ -6,6 +6,7 @@ import com.example.work9.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,24 +37,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(int id, String name) {
-        User findUser = findUser(id);
-        if (findUser == null) {
-            return findUser;
+        User user = findUser(id);
+        if (Objects.isNull(user)) {
+            return user;
         }
-        User user = new User(id, name);
+        user = new User(id, name);
         userMapper.updateUser(user);
         return user;
     }
 
     @Override
     public User deleteUser(int id) {
-        User findUser = findUser(id);
-        if (findUser == null) {
-            return findUser;
+        User user = findUser(id);
+        if (Objects.isNull(user)) {
+            return user;
         }
-        User user = new User(id);
+        user = new User(id);
         userMapper.deleteUser(id);
-
         return user;
     }
 }
