@@ -41,9 +41,9 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(user)) {
             return user;
         }
-        user = new User(id, name);
-        userMapper.updateUser(user);
-        return user;
+        User updateUserName = new User(id, name);
+        userMapper.updateUser(updateUserName);
+        return updateUserName;
     }
 
     @Override
@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(user)) {
             return user;
         }
-        user = new User(id);
+        User deleteUser = new User(id);
         userMapper.deleteUser(id);
-        return user;
+        return deleteUser;
     }
 }
