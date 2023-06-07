@@ -1,6 +1,7 @@
 package com.example.work9.mapper;
 
 import com.example.work9.entity.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -25,4 +26,6 @@ public interface UserMapper {
     @Update("UPDATE names SET name = #{name} WHERE id = #{id}")
     void updateUser(User user);
 
+    @Delete("DELETE FROM names WHERE id = #{id}")
+    void deleteUser(int id);
 }
