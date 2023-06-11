@@ -53,7 +53,7 @@ class UserServiceImplTest {
 
         assertThatThrownBy(() -> userServiceImpl.findUser(99))
                 .isInstanceOfSatisfying(ResourceNotFoundException.class, e -> {
-                    assertThat(e.getMessage()).isEqualTo("id:99,resource not found");
+                    assertThat(e.getMessage()).isEqualTo("No user found for id: 99");
                 });
         verify(userMapper, times(1)).findById(99);
     }
