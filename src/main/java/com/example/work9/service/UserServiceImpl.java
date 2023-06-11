@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUser(int id) {
-        Optional<User> user = this.userMapper.findById(id);
+        Optional<User> user = userMapper.findById(id);
         return user.orElseThrow(() -> new ResourceNotFoundException("id:" + id + ",resource not found"));
     }
 
