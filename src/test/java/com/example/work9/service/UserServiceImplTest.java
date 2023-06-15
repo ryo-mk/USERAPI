@@ -14,7 +14,9 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -56,6 +58,34 @@ class UserServiceImplTest {
                     assertThat(e.getMessage()).isEqualTo("No user found for id: 99");
                 });
         verify(userMapper, times(1)).findById(99);
+    }
+
+    @Test
+    public void ユーザーを登録できること() {
+        User createUser = new User("shinki");
+        doNothing().when(userMapper).createUser(createUser);
+        userServiceImpl.createUser("shinki");
+        verify(userMapper, times(1)).createUser(createUser);
+    }
+
+    @Test
+    public void 存在するidのユーザーが更新できること() {
+        doReturn(Optional.of(new User(1, "tanaka"))).when(userMapper).findById(1);
+        userServiceImpl.updateUser(1, "oota");
+        verify(userMapper, times(1)).findById(1);
+        verify(userMapper, times(1)).updateUser(new User(1, "oota"));
+    }
+
+    @Test
+    public void 更新対象のidが存在しない時に例外がスローされること() {
+        doReturn(Optional.empty()).when(userMapper).findById(99);
+
+        assertThatThrownBy(() -> userServiceImpl.updateUser(99, ""))
+                .isInstanceOfSatisfying(ResourceNotFoundException.class, e -> {
+                    assertThat(e.getMessage()).isEqualTo("No user found for id: 99");
+                });
+        verify(userMapper, times(1)).findById(99);
+        verify(userMapper, never()).updateUser(new User(99, ""));
     }
 
 }
