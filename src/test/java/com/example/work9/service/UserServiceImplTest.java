@@ -88,4 +88,23 @@ class UserServiceImplTest {
         verify(userMapper, never()).updateUser(new User(99, ""));
     }
 
+    @Test
+    public void 存在するidのユーザーを削除できること() {
+        doReturn(Optional.of(new User(1, "tanaka"))).when(userMapper).findById(1);
+        userServiceImpl.deleteUser(1);
+        verify(userMapper, times(1)).findById(1);
+        verify(userMapper, times(1)).deleteUser(1);
+    }
+
+    @Test
+    public void 削除対象のidが存在しない時に例外がスローされること() {
+        doReturn(Optional.empty()).when(userMapper).findById(99);
+
+        assertThatThrownBy(() -> userServiceImpl.deleteUser(99))
+                .isInstanceOfSatisfying(ResourceNotFoundException.class, e -> {
+                    assertThat(e.getMessage()).isEqualTo("No user found for id: 99");
+                });
+        verify(userMapper, times(1)).findById(99);
+        verify(userMapper, never()).deleteUser(99);
+    }
 }
