@@ -27,8 +27,7 @@ class UserMapperTest {
     void 全てのユーザーが取得できること() {
         List<User> users = userMapper.findAll();
         assertThat(users)
-                .hasSize(3)
-                .contains(
+                .containsExactly(
                         new User(1, "tanaka"),
                         new User(2, "yamada"),
                         new User(3, "suzuki")
