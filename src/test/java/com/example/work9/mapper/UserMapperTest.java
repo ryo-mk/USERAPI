@@ -75,7 +75,7 @@ class UserMapperTest {
 
         userMapper.createUser(laterUser);
         assertThat(laterUser.getId()).isGreaterThan(0);
-        
+
         assertThat(laterUser.getId()).isGreaterThan(previousUser.getId());
     }
 
@@ -83,7 +83,7 @@ class UserMapperTest {
     @DataSet(value = "datasets/names.yml")
     @ExpectedDataSet(value = "datasets/updateNames.yml")
     @Transactional
-    void 指定したIDのユーザーが更新できること() {
+    void 指定したidのユーザーが更新できること() {
         User user = new User(3, "takagi");
         userMapper.updateUser(user);
     }
@@ -92,7 +92,7 @@ class UserMapperTest {
     @Transactional
     @DataSet(value = "datasets/names.yml")
     @ExpectedDataSet(value = "datasets/deleteNames.yml")
-    public void 映画を削除できること() {
+    void ユーザーを削除できること() {
         userMapper.deleteUser(3);
     }
 }
