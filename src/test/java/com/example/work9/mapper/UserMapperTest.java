@@ -2,6 +2,7 @@ package com.example.work9.mapper;
 
 import com.example.work9.entity.User;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -56,5 +57,42 @@ class UserMapperTest {
     public void 指定したidのユーザーが存在しない時空のOptionalを返すこと() {
         Optional<User> users = userMapper.findById(99);
         assertThat(users).isEmpty();
+    }
+
+    @Test
+    @DataSet(value = "datasets/names.yml")
+    @ExpectedDataSet(value = "datasets/createNames.yml", ignoreCols = "id")
+    @Transactional
+    void ユーザーが登録できる且つ既存のidより大きい数字のidが採番されること() {
+        User previousUser = new User("kato");
+        assertThat(previousUser.getId()).isEqualTo(0);
+
+        userMapper.createUser(previousUser);
+        assertThat(previousUser.getId()).isGreaterThan(0);
+
+        User laterUser = new User("shimura");
+        assertThat(laterUser.getId()).isEqualTo(0);
+
+        userMapper.createUser(laterUser);
+        assertThat(laterUser.getId()).isGreaterThan(0);
+        
+        assertThat(laterUser.getId()).isGreaterThan(previousUser.getId());
+    }
+
+    @Test
+    @DataSet(value = "datasets/names.yml")
+    @ExpectedDataSet(value = "datasets/updateNames.yml")
+    @Transactional
+    void 指定したIDのユーザーが更新できること() {
+        User user = new User(3, "takagi");
+        userMapper.updateUser(user);
+    }
+
+    @Test
+    @Transactional
+    @DataSet(value = "datasets/names.yml")
+    @ExpectedDataSet(value = "datasets/deleteNames.yml")
+    public void 映画を削除できること() {
+        userMapper.deleteUser(3);
     }
 }

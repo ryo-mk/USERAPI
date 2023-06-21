@@ -1,0 +1,11 @@
+names:
+  - id: 1
+    name: "tanaka"
+  - id: 2
+    name: "yamada"
+  - id: 3
+    name: "suzuki"
+  - id: 4
+    name: "kato"
+  - id: 5
+    name: "shimura"
