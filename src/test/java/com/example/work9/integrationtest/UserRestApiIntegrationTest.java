@@ -1,6 +1,7 @@
 package com.example.work9.integrationtest;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,6 +22,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import static org.mockito.Mockito.mockStatic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -106,5 +110,64 @@ class UserRestApiIntegrationTest {
                     }
                     """, response, JSONCompareMode.STRICT);
         }
+    }
+
+    @Test
+    @DataSet(value = "datasets/names.yml")
+    @ExpectedDataSet(value = "datasets/createNames.yml", ignoreCols = "id")
+    @Transactional
+    void ユーザーが登録できること() throws Exception {
+        String previousUser = """
+                {
+                   "name":"kato"
+                }
+                """;
+        String laterUser = """
+                {
+                   "name":"shimura"
+                }
+                """;
+        String expectedResponse = """
+                {
+                   "message":"user successfully created"
+                }
+                """;
+
+        // 1回目のリクエストの検証
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(previousUser))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json(expectedResponse));
+
+        // 2回目のリクエストの検証
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(laterUser))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json(expectedResponse));
+    }
+
+    @Test
+    void 登録時のnameがnullか空の場合登録に失敗すること() throws Exception {
+        mockMvc.perform(post("/users")
+                        .content("""
+                                {
+                                   "name":
+                                }
+                                """)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+        mockMvc.perform(post("/users")
+                        .content("""
+                                {
+                                   "name":""
+                                }
+                                """)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }
