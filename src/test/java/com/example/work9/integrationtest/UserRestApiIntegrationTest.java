@@ -172,7 +172,7 @@ class UserRestApiIntegrationTest {
 
     @Test
     @DataSet(value = "datasets/names.yml")
-    @ExpectedDataSet(value = "datasets/updateNames.yml", ignoreCols = "id")
+    @ExpectedDataSet(value = "datasets/updateNames.yml")
     @Transactional
     void 指定したidのユーザーを更新できること() throws Exception {
         String response = mockMvc.perform(patch("/users/3")
