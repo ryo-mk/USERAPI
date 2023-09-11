@@ -1,6 +1,6 @@
-package com.example.userAPI.service;
+package com.example.users.service;
 
-import com.example.userAPI.entity.User;
+import com.example.users.entity.User;
 
 import java.util.List;
 

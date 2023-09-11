@@ -1,8 +1,8 @@
-package com.example.userAPI.service;
+package com.example.users.service;
 
-import com.example.userAPI.entity.User;
-import com.example.userAPI.exception.ResourceNotFoundException;
-import com.example.userAPI.mapper.UserMapper;
+import com.example.users.entity.User;
+import com.example.users.exception.ResourceNotFoundException;
+import com.example.users.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

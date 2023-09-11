@@ -1,9 +1,9 @@
-package com.example.userAPI.form;
+package com.example.users.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UpdateForm {
+public class CreateForm {
     @NotBlank
     @Size(max = 20)
     private String name;
