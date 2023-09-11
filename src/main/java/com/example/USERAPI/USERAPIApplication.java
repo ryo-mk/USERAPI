@@ -1,11 +1,11 @@
-package com.example.work9;
+package com.example.USERAPI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Work9Application {
+public class USERAPIApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Work9Application.class, args);
+        SpringApplication.run(USERAPIApplication.class, args);
     }
 }

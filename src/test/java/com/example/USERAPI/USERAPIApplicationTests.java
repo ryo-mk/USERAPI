@@ -1,13 +1,13 @@
-package com.example.work9;
+package com.example.USERAPI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Work9ApplicationTests {
+class USERAPIApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

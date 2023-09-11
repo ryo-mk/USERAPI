@@ -1,8 +1,8 @@
-package com.example.work9.service;
+package com.example.USERAPI.service;
 
-import com.example.work9.entity.User;
-import com.example.work9.exception.ResourceNotFoundException;
-import com.example.work9.mapper.UserMapper;
+import com.example.USERAPI.entity.User;
+import com.example.USERAPI.exception.ResourceNotFoundException;
+import com.example.USERAPI.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
