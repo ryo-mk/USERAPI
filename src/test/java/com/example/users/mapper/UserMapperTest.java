@@ -1,6 +1,6 @@
-package com.example.work9.mapper;
+package com.example.users.mapper;
 
-import com.example.work9.entity.User;
+import com.example.users.entity.User;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;

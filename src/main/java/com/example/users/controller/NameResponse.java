@@ -1,6 +1,6 @@
-package com.example.work9.controller;
+package com.example.users.controller;
 
-import com.example.work9.entity.User;
+import com.example.users.entity.User;
 
 public class NameResponse {
     private int id;

@@ -1,4 +1,4 @@
-package com.example.work9.entity;
+package com.example.users.entity;
 
 import java.util.Objects;
 

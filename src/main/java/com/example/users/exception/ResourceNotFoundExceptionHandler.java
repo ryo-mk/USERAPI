@@ -1,4 +1,4 @@
-package com.example.work9.exception;
+package com.example.users.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

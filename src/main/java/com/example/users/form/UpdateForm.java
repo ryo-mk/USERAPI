@@ -1,4 +1,4 @@
-package com.example.work9.form;
+package com.example.users.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

@@ -1,6 +1,6 @@
-package com.example.work9.service;
+package com.example.users.service;
 
-import com.example.work9.entity.User;
+import com.example.users.entity.User;
 
 import java.util.List;
 

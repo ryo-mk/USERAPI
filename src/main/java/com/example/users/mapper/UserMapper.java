@@ -1,6 +1,6 @@
-package com.example.work9.mapper;
+package com.example.users.mapper;
 
-import com.example.work9.entity.User;
+import com.example.users.entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
