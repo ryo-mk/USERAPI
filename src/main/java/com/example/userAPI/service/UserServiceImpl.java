@@ -1,8 +1,8 @@
-package com.example.USERAPI.service;
+package com.example.userAPI.service;
 
-import com.example.USERAPI.entity.User;
-import com.example.USERAPI.exception.ResourceNotFoundException;
-import com.example.USERAPI.mapper.UserMapper;
+import com.example.userAPI.entity.User;
+import com.example.userAPI.exception.ResourceNotFoundException;
+import com.example.userAPI.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

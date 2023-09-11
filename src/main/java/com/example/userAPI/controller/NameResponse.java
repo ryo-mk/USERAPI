@@ -1,6 +1,6 @@
-package com.example.USERAPI.controller;
+package com.example.userAPI.controller;
 
-import com.example.USERAPI.entity.User;
+import com.example.userAPI.entity.User;
 
 public class NameResponse {
     private int id;

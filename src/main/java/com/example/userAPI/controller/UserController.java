@@ -1,9 +1,9 @@
-package com.example.USERAPI.controller;
+package com.example.userAPI.controller;
 
-import com.example.USERAPI.entity.User;
-import com.example.USERAPI.form.CreateForm;
-import com.example.USERAPI.form.UpdateForm;
-import com.example.USERAPI.service.UserService;
+import com.example.userAPI.entity.User;
+import com.example.userAPI.form.CreateForm;
+import com.example.userAPI.form.UpdateForm;
+import com.example.userAPI.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;

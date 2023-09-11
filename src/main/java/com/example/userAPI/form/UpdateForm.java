@@ -1,4 +1,4 @@
-package com.example.USERAPI.form;
+package com.example.userAPI.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

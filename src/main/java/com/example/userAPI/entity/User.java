@@ -1,4 +1,4 @@
-package com.example.USERAPI.entity;
+package com.example.userAPI.entity;
 
 import java.util.Objects;
 

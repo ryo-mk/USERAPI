@@ -1,10 +1,10 @@
-package com.example.USERAPI;
+package com.example.userAPI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class USERAPIApplicationTests {
+class usersApplicationTests {
 
     @Test
     void contextLoads() {

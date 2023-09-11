@@ -1,4 +1,4 @@
-package com.example.USERAPI.integrationtest;
+package com.example.userAPI.integrationtest;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;

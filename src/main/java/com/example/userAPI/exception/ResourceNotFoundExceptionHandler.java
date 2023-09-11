@@ -1,4 +1,4 @@
-package com.example.USERAPI.exception;
+package com.example.userAPI.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
