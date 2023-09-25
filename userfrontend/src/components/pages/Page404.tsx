@@ -1,6 +1,6 @@
-import { Box, Flex, Heading, Link } from "@chakra-ui/react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Box, Flex, Heading, Link } from "@chakra-ui/react";
 
 export const Page404 = () => {
   const navigate = useNavigate();
@@ -13,13 +13,7 @@ export const Page404 = () => {
           該当ページが存在しません
         </Heading>
         <br />
-        <Link
-          as="a" // Linkをa要素としてレンダリング
-          textDecoration="underline" // 下線を追加
-          color="teal.500" // テキストカラーを変更
-          _hover={{ textDecoration: "none", color: "teal.700" }}
-          onClick={onClickHome}
-        >
+        <Link as="a" textDecoration="underline" color="teal.500" _hover={{ textDecoration: "none", color: "teal.700" }} onClick={onClickHome}>
           TOPへ戻る
         </Link>
       </Box>
