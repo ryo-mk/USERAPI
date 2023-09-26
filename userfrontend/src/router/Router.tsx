@@ -5,6 +5,7 @@ import { Search } from "../components/pages/Search";
 import { Page404 } from "../components/pages/Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { HowToUse } from "../components/pages/HowToUse";
+import { Register } from "../components/pages/Register";
 
 export const Router: FC = memo(() => {
   return (
@@ -22,6 +23,14 @@ export const Router: FC = memo(() => {
         element={
           <HeaderLayout>
             <Search />
+          </HeaderLayout>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <HeaderLayout>
+            <Register />
           </HeaderLayout>
         }
       />

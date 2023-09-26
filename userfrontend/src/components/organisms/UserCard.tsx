@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Box, Image, Stack, Text } from "@chakra-ui/react";
 
-import { User } from "../types/api/user";
+import { User } from "../../types/api/user";
 
 export const UserCard: FC<User> = (props) => {
   const { id, name } = props;

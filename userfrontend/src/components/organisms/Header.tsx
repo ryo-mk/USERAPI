@@ -1,8 +1,8 @@
 import { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Link, useDisclosure } from "@chakra-ui/react";
-import { MenuIconButton } from "../components/atoms/MenuIconButton";
-import { MenuDrawer } from "./molecules/MenuDrawer";
+import { MenuIconButton } from "../atoms/MenuIconButton";
+import { MenuDrawer } from "../molecules/MenuDrawer";
 
 export const Header: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -12,8 +12,8 @@ export const Header: FC = () => {
     navigate("/");
     onClose();
   }, []);
-  const onClickSearch = useCallback(() => {
-    navigate("/search");
+  const onClickRegister = useCallback(() => {
+    navigate("/register");
     onClose();
   }, []);
   const onClickHowToUse = useCallback(() => {
@@ -31,13 +31,13 @@ export const Header: FC = () => {
         </Flex>
         <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
           <Box pr={4}>
-            <Link onClick={onClickSearch}>ユーザー一覧</Link>
+            <Link onClick={onClickRegister}>ユーザー登録</Link>
           </Box>
           <Link onClick={onClickHowToUse}>使い方</Link>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickSearch={onClickSearch} onClickHowToUse={onClickHowToUse} />
+      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickRegister={onClickRegister} onClickHowToUse={onClickHowToUse} />
     </>
   );
 };

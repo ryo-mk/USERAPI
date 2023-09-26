@@ -1,8 +1,7 @@
 import { FC, memo, useCallback, useEffect, useState } from "react";
 import { Button, Flex, HStack, Input, Link, Text, Wrap, WrapItem } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
-import { UserCard } from "../UserCard";
+import { UserCard } from "../organisms/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { useFindById } from "../../hooks/useFindById";
 
