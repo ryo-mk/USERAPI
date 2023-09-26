@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { Button, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Router } from "./router/Router";
 
 import theme from "./theme/theme";
