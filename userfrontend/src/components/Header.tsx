@@ -1,26 +1,43 @@
-import { Flex, HStack, Heading, Link, Stack } from "@chakra-ui/react";
-import { FC, ReactNode, useCallback } from "react";
+import { FC, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Box, Flex, Heading, Link, useDisclosure } from "@chakra-ui/react";
+import { MenuIconButton } from "../components/atoms/MenuIconButton";
+import { MenuDrawer } from "./molecules/MenuDrawer";
 
-type HeaderProps = {
-  children: ReactNode;
-};
-
-export const Header: FC<HeaderProps> = (props) => {
-  const { children } = props;
+export const Header: FC = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const onClickSearch = useCallback(() => navigate("/search"), []);
-  const onClickUserManagement = useCallback(() => navigate("/usermanagement"), []);
+
+  const onClickHome = useCallback(() => {
+    navigate("/");
+    onClose();
+  }, []);
+  const onClickSearch = useCallback(() => {
+    navigate("/search");
+    onClose();
+  }, []);
+  const onClickHowToUse = useCallback(() => {
+    navigate("/howtouse");
+    onClose();
+  }, []);
 
   return (
     <>
-      <HStack>
-        <Flex as="a" _hover={{ cursor: "pointer" }} onClick={onClickSearch}>
-          <Heading as="h1">USERS</Heading>
+      <Flex as="nav" bg="teal.500" color="gray.50" align="center" justify="space-between" padding={{ base: 3, md: 5 }}>
+        <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome}>
+          <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
+            USERS
+          </Heading>
         </Flex>
-        <Link onClick={onClickUserManagement}>ユーザー編集</Link>
-      </HStack>
-      {children}
+        <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
+          <Box pr={4}>
+            <Link onClick={onClickSearch}>ユーザー一覧</Link>
+          </Box>
+          <Link onClick={onClickHowToUse}>使い方</Link>
+        </Flex>
+        <MenuIconButton onOpen={onOpen} />
+      </Flex>
+      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickSearch={onClickSearch} onClickHowToUse={onClickHowToUse} />
     </>
   );
 };

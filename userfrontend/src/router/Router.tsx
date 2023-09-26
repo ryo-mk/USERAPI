@@ -1,38 +1,39 @@
-import { VFC, memo } from "react";
+import { FC, memo } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Search } from "../components/pages/Search";
-import { UserManagement } from "../components/pages/UserManagement";
 import { Page404 } from "../components/pages/Page404";
-import { Header } from "../components/Header";
+import { HeaderLayout } from "../components/templates/HeaderLayout";
+import { HowToUse } from "../components/pages/HowToUse";
 
-export const Router: VFC = memo(() => {
+export const Router: FC = memo(() => {
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <Header>
+          <HeaderLayout>
             <Search />
-          </Header>
+          </HeaderLayout>
         }
       />
       <Route
         path="/search"
         element={
-          <Header>
+          <HeaderLayout>
             <Search />
-          </Header>
+          </HeaderLayout>
         }
       />
       <Route
-        path="/usermanagement"
+        path="/howtouse"
         element={
-          <Header>
-            <UserManagement />
-          </Header>
+          <HeaderLayout>
+            <HowToUse />
+          </HeaderLayout>
         }
       />
+
       <Route path="*" element={<Page404 />} />
     </Routes>
   );
