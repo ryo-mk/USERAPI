@@ -7,6 +7,7 @@ export type FindByIdProps = {
   userId: string;
 };
 
+// 入力されたidに該当するユーザーを取得するカスタムフック
 export const useFindById = () => {
   const [user, setUser] = useState<User>();
 
