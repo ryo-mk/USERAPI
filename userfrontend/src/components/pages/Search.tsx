@@ -3,29 +3,34 @@ import { Button, Flex, HStack, Input, Wrap, WrapItem, useDisclosure } from "@cha
 
 import { UserCard } from "../organisms/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
-import { useFindById } from "../../hooks/useFindById";
 import { UserDetailModal } from "../organisms/UserDetailModal";
 import { useSelectUser } from "../../hooks/useSelectUser";
 
 export const Search: FC = memo(() => {
-  const imageApiUrl = "https://source.unsplash.com/random";
+  // console.log("再レンダリング");
 
-  const [userId, setUserId] = useState<string>("");
+  // ユーザーカードの画像を外部から取得
+  const imageApiUrl = "https://source.unsplash.com/random";
+  // 検索機能のon,offを切り替え
   const [onSearch, setOnSearch] = useState(false);
+  // 入力された値を保持する
+  const [inputId, setInputId] = useState<string>("");
+  // 検索時のidを記憶
+  const [userId, setUserId] = useState<string>("");
+  // user情報の更新を監視する
+  const [updateFlag, setUpdateFlag] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, users } = useAllUsers();
-  const { getUser, user } = useFindById();
   const { onSelectUser, selectedUser } = useSelectUser();
 
-  const onClickSearchReset = useCallback(() => {
-    setOnSearch(false);
-  }, []);
+  // console.log("inpuId", inputId);
+  // console.log("userId", userId);
+  // console.log("search", users);
+  // console.log("findUser", findUser);
+  // console.log("Flag", updateFlag);
 
-  const SearchIdUser = useCallback(() => {
-    setOnSearch(true);
-    setUserId("");
-  }, []);
+  useEffect(() => getUsers(), []);
 
   const onClickUser = useCallback(
     (id: number) => {
@@ -34,7 +39,19 @@ export const Search: FC = memo(() => {
     [users, onSelectUser, onOpen]
   );
 
-  useEffect(() => getUsers(), [users]);
+  const onClickSearchReset = useCallback(() => {
+    setOnSearch(false);
+  }, []);
+
+  const onClickSearchSubmit = useCallback(() => {
+    console.log("onClickSearchSubmit called");
+    setOnSearch(true);
+    const inputElement = document.getElementById("userIdInput");
+    if (inputElement instanceof HTMLInputElement) {
+      setUserId(inputElement.value);
+      inputElement.value = "";
+    }
+  }, []);
 
   return (
     <>
@@ -43,28 +60,23 @@ export const Search: FC = memo(() => {
           検索リセット
         </Button>
         <Flex>
-          <Input placeholder="ユーザーIDを入力" value={userId} onChange={(e) => setUserId(e.target.value)} bg="white" />
-          <Button
-            bg="gray.300"
-            borderRadius="md"
-            mx={4}
-            onClick={() => {
-              getUser({ userId });
-              SearchIdUser();
-            }}
-          >
+          <Input id="userIdInput" placeholder="ユーザーIDを入力" onChange={(e) => setInputId(e.target.value)} bg="white" />
+          <Button bg="gray.300" borderRadius="md" mx={4} onClick={onClickSearchSubmit}>
             検索
           </Button>
         </Flex>
       </HStack>
+
       <Flex>
         {onSearch ? (
           <Wrap p={{ base: 4, md: 10 }}>
-            {user && (
-              <WrapItem>
-                <UserCard imageApiUrl={imageApiUrl} id={user.id} name={user.name} onClick={onClickUser} />
-              </WrapItem>
-            )}
+            {users
+              .filter((user) => String(user.id) === userId)
+              .map((user) => (
+                <WrapItem key={user.id} mx="auto">
+                  <UserCard imageApiUrl={imageApiUrl} id={user.id} name={user.name} onClick={onClickUser} />
+                </WrapItem>
+              ))}
           </Wrap>
         ) : (
           <Wrap p={{ base: 4, md: 10 }}>
@@ -76,7 +88,7 @@ export const Search: FC = memo(() => {
           </Wrap>
         )}
       </Flex>
-      <UserDetailModal user={selectedUser} isOpen={isOpen} onClose={onClose} />
+      <UserDetailModal users={users} user={selectedUser} isOpen={isOpen} onClose={onClose} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} />
     </>
   );
 });

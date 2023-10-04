@@ -10,11 +10,13 @@ export const useAllUsers = () => {
   const getUsers = useCallback(() => {
     axios
       .get<Array<User>>("http://localhost:8080/users")
-      .then((res) => setUsers(res.data))
+      .then((res) => {
+        setUsers(res.data);
+      })
       .catch(() => {
         alert("ユーザーが見つかりませんでした");
       });
   }, []);
 
-  return { getUsers, users };
+  return { getUsers, users, setUsers };
 };

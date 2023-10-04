@@ -1,23 +1,27 @@
-import { FC, useEffect, useState, ChangeEvent } from "react";
+import { FC, useEffect, useState, ChangeEvent, useMemo } from "react";
 
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, FormControl, FormLabel, Input, ModalFooter, Button } from "@chakra-ui/react";
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, FormControl, FormLabel, Input, ModalFooter, Button, FormHelperText, FormErrorMessage } from "@chakra-ui/react";
 
 import type { User } from "../../types/api/user";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
-import { useAllUsers } from "../../hooks/useAllUsers";
 
 type Props = {
+  users: Array<User>;
   user: User | null;
   isOpen: boolean;
   onClose: () => void;
+  updateFlag: boolean;
+  setUpdateFlag: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const UserDetailModal: FC<Props> = (props) => {
+  const { users, user, isOpen, onClose, updateFlag, setUpdateFlag } = props;
+
   const [name, setName] = useState("");
 
-  const { user, isOpen, onClose } = props;
-  const { getUsers, users } = useAllUsers();
   const { updateUser } = useUpdateUser();
+
+  const isError = useMemo(() => name === "", [name]);
 
   useEffect(() => {
     setName(user?.name ?? "");
@@ -28,9 +32,9 @@ export const UserDetailModal: FC<Props> = (props) => {
   };
 
   const onClickUpdate = () => {
-    updateUser({ user, name });
+    updateUser({ users, user, name, updateFlag, setUpdateFlag });
+
     onClose();
-    getUsers();
   };
 
   return (
@@ -45,9 +49,10 @@ export const UserDetailModal: FC<Props> = (props) => {
                 <FormLabel>id</FormLabel>
                 <Input value={user?.id} isReadOnly />
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={isError}>
                 <FormLabel>name</FormLabel>
                 <Input value={name} onChange={onChangeName} />
+                {!isError ? <FormHelperText>名前を入力してください(20文字以内)</FormHelperText> : <FormErrorMessage>*名前は必須です*</FormErrorMessage>}
               </FormControl>
               <FormControl>
                 <FormLabel>mail</FormLabel>

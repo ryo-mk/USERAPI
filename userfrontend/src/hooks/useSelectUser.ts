@@ -13,6 +13,7 @@ export const useSelectUser = () => {
 
   const onSelectUser = useCallback((props: SelectUserProps) => {
     const { id, users, onOpen } = props;
+
     const targetUser = users.find((user) => user.id === id);
     setSelectedUser(targetUser!);
     onOpen();
