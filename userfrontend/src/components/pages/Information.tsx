@@ -5,10 +5,10 @@ import { UserCard } from "../organisms/UserCard";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { UserDetailModal } from "../organisms/UserDetailModal";
 import { useSelectUser } from "../../hooks/useSelectUser";
+import { useMessage } from "../../hooks/useMessage";
+// import { useFindById } from "../../hooks/useFindById";
 
-export const Search: FC = memo(() => {
-  // console.log("再レンダリング");
-
+export const Information: FC = memo(() => {
   // ユーザーカードの画像を外部から取得
   const imageApiUrl = "https://source.unsplash.com/random";
   // 検索機能のon,offを切り替え
@@ -18,19 +18,15 @@ export const Search: FC = memo(() => {
   // 検索時のidを記憶
   const [userId, setUserId] = useState<string>("");
   // user情報の更新を監視する
-  const [updateFlag, setUpdateFlag] = useState(false);
+  const [informationChangeFlag, setInformationChangeFlag] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { getUsers, users } = useAllUsers();
+  // const { getUser, findUser, setFindUser } = useFindById();
   const { onSelectUser, selectedUser } = useSelectUser();
+  const { showMessage } = useMessage();
 
-  // console.log("inpuId", inputId);
-  // console.log("userId", userId);
-  // console.log("search", users);
-  // console.log("findUser", findUser);
-  // console.log("Flag", updateFlag);
-
-  useEffect(() => getUsers(), []);
+  useEffect(() => getUsers(), [informationChangeFlag]);
 
   const onClickUser = useCallback(
     (id: number) => {
@@ -41,17 +37,31 @@ export const Search: FC = memo(() => {
 
   const onClickSearchReset = useCallback(() => {
     setOnSearch(false);
+    showMessage({ title: "検索結果をリセットしました", status: "success" });
   }, []);
 
   const onClickSearchSubmit = useCallback(() => {
-    console.log("onClickSearchSubmit called");
-    setOnSearch(true);
     const inputElement = document.getElementById("userIdInput");
+
     if (inputElement instanceof HTMLInputElement) {
-      setUserId(inputElement.value);
-      inputElement.value = "";
+      const inputValue = inputElement.value;
+
+      // id が存在するか確認
+      if (inputValue.trim() !== "") {
+        const isIdExists = users.some((user) => user.id === parseInt(inputValue));
+
+        if (isIdExists) {
+          setUserId(inputValue);
+          setOnSearch(true);
+        } else {
+          showMessage({ title: "入力されたIDは存在しません", status: "error" });
+        }
+      } else {
+        showMessage({ title: "入力が空です。IDを入力してください", status: "error" });
+      }
+      inputElement.value = ""; // 入力欄をクリア
     }
-  }, []);
+  }, [users]);
 
   return (
     <>
@@ -88,7 +98,7 @@ export const Search: FC = memo(() => {
           </Wrap>
         )}
       </Flex>
-      <UserDetailModal users={users} user={selectedUser} isOpen={isOpen} onClose={onClose} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} />
+      <UserDetailModal users={users} user={selectedUser} isOpen={isOpen} onClose={onClose} informationChangeFlag={informationChangeFlag} setInformationChangeFlag={setInformationChangeFlag} setOnSearch={setOnSearch} />
     </>
   );
 });

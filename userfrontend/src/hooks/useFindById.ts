@@ -4,7 +4,7 @@ import axios from "axios";
 import type { User } from "../types/api/user";
 
 export type FindByIdProps = {
-  userId: string;
+  inputId: string;
 };
 
 // 入力されたidに該当するユーザーを取得するカスタムフック
@@ -12,10 +12,10 @@ export const useFindById = () => {
   const [findUser, setFindUser] = useState<User | undefined>();
 
   const getUser = useCallback((props: FindByIdProps) => {
-    const { userId } = props;
+    const { inputId } = props;
 
     axios
-      .get<User>(`http://localhost:8080/users/${userId}`)
+      .get<User>(`http://localhost:8080/users/${inputId}`)
       .then((res) => setFindUser(res.data))
       .catch(() => {
         alert("ユーザーが見つかりませんでした");

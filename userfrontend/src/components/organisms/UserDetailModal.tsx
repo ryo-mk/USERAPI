@@ -4,22 +4,25 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOve
 
 import type { User } from "../../types/api/user";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
+import { useDeleteUser } from "../../hooks/useDeleteUser";
 
 type Props = {
   users: Array<User>;
   user: User | null;
   isOpen: boolean;
   onClose: () => void;
-  updateFlag: boolean;
-  setUpdateFlag: React.Dispatch<React.SetStateAction<boolean>>;
+  setOnSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  informationChangeFlag: boolean;
+  setInformationChangeFlag: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const UserDetailModal: FC<Props> = (props) => {
-  const { users, user, isOpen, onClose, updateFlag, setUpdateFlag } = props;
+  const { users, user, isOpen, onClose, setOnSearch, informationChangeFlag, setInformationChangeFlag } = props;
 
   const [name, setName] = useState("");
 
   const { updateUser } = useUpdateUser();
+  const { deleteUser } = useDeleteUser();
 
   const isError = useMemo(() => name === "", [name]);
 
@@ -32,8 +35,12 @@ export const UserDetailModal: FC<Props> = (props) => {
   };
 
   const onClickUpdate = () => {
-    updateUser({ users, user, name, updateFlag, setUpdateFlag });
+    updateUser({ users, user, name, informationChangeFlag, setInformationChangeFlag });
+    onClose();
+  };
 
+  const onClickDelete = () => {
+    deleteUser({ user, setOnSearch, informationChangeFlag, setInformationChangeFlag });
     onClose();
   };
 
@@ -65,8 +72,11 @@ export const UserDetailModal: FC<Props> = (props) => {
             </Stack>
           </ModalBody>
           <ModalFooter>
-            <Button bg="teal.400" color="white" onClick={onClickUpdate}>
+            <Button bg="teal.400" color="white" onClick={onClickUpdate} mr={2}>
               更新
+            </Button>
+            <Button bg="red.300" color="white" onClick={onClickDelete}>
+              削除
             </Button>
           </ModalFooter>
         </ModalContent>
