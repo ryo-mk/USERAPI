@@ -10,6 +10,22 @@
     * Checkstyle
     * Discordへ結果通知
 
+### ユーザー登録
+
+ <img src="image/registeruser.gif" width="75%"/>
+
+### ユーザー検索(id)
+
+ <img src="image/searchuser.gif" width="75%"/>
+
+### ユーザー編集
+
+ <img src="image/updateduser.gif" width="75%"/>
+
+### ユーザー削除
+
+ <img src="image/deleteuser.gif" width="75%"/>
+
 ### アプリケーション概略図
 
 ![アプリケーション概略図 drawio](https://github.com/ryo-mk/work9/assets/85010733/a4f69f71-59a0-4c77-b108-5c494b63c5f1)
@@ -25,16 +41,21 @@
 
 ## 3.起動手順
 
-* リポジトリをgit cloneします
-  `git clone https://github.com/ryo-mk/work9.git`
+* リポジトリをgit cloneします  
+  `git clone https://github.com/ryo-mk/USERAPI`
 * Dockerを起動し、ターミナルで以下のコマンドを実行します。  
   `docker compose up`
-
-* `src/main/java/com/example/work9`配下にある
-  `Work09Application.java`クラスを実行します。
-
+* `src/main/java/com/example/users`配下にある
+  `UsersApplication.java`クラスを実行します。
 * Postmanを起動し、実行したい操作に応じてHTTPメソッドの選択、URLの入力、
   リクエストボディの入力を行います。
+
+* userfrontendディレクトリに移動する。  
+  `cd userfrontend/`
+
+* 依存関係をインストールし、Reactのアプリケーションを起動する。  
+  `npm install`
+  `npm start`
 
 ## 4.API仕様書
 
@@ -187,5 +208,32 @@ SwaggerによるAPI仕様書(作成中)
 
 1./users/id で指定したidのユーザーを削除する
 2.指定したidのユーザーが存在しない場合、404エラーを返す
+
+</details>
+
+***
+
+<details>
+<summary>フロントエンドの実装</summary>
+
+## 全てのユーザーをDBから取得し、表示
+
+* 初期画面で、全てのユーザーを取得し表示する機能を実装
+* 任意のユーザーカードを選択すると、そのユーザーの詳細情報をモーダル表示する
+
+## id検索機能を実装
+
+* 指定したidを入力し、検索ボタンを押すと特定のidのユーザーのみを表示する機能を実装
+* リセットボタンで検索を中止し、全てのユーザーを表示する
+
+## ユーザー登録の実装
+
+* ユーザー登録画面で、名前を入力し登録ボタンを押すとユーザー登録を行う
+* 成功時は成功のポップアップを表示し、失敗時には失敗しましたの表示を行う
+
+## ユーザー編集機能の実装
+
+* ユーザーカード内で名前を変更し、更新ボタンを押すとユーザー名を変更する
+* 変更後は成功、失敗のポップアップを表示し、モーダルを閉じる。
 
 </details>

@@ -5,12 +5,12 @@ type Props = {
   onClose: () => void;
   isOpen: boolean;
   onClickHome: () => void;
-  onClickSearch: () => void;
+  onClickRegister: () => void;
   onClickHowToUse: () => void;
 };
 
 export const MenuDrawer: FC<Props> = (props) => {
-  const { onClose, isOpen, onClickHome, onClickSearch, onClickHowToUse } = props;
+  const { onClose, isOpen, onClickHome, onClickRegister, onClickHowToUse } = props;
 
   return (
     <Drawer placement="left" size="xs" onClose={onClose} isOpen={isOpen}>
@@ -20,8 +20,8 @@ export const MenuDrawer: FC<Props> = (props) => {
             <Button w="100%" onClick={onClickHome}>
               TOP
             </Button>
-            <Button w="100%" onClick={onClickSearch}>
-              ユーザー一覧
+            <Button w="100%" onClick={onClickRegister}>
+              ユーザー登録
             </Button>
             <Button w="100%" onClick={onClickHowToUse}>
               使い方
