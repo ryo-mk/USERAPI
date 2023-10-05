@@ -9,6 +9,7 @@
 * CIの実装
     * Checkstyle
     * Discordへ結果通知
+* React,typescript によるフロントエンドの実装
 
 ### ユーザー登録
 
@@ -38,6 +39,9 @@
     * MyBatis 3.0.0
 * Docker
     * MySQL 8.0.33
+* React 18.2.0
+    * typescript 18.2.22
+    * chakra-ui 2.8.1
 
 ## 3.起動手順
 
@@ -84,7 +88,8 @@ SwaggerによるAPI仕様書(作成中)
 ## 7.今後の展望
 
 * AWSへのデプロイ
-* フロントサイドの実装(現在React,typescriptで編集中)
+* 実装機能の拡張、追加
+  *name以外の項目の追加、ユーザーの所属テーブルの追加など
 * Java関連資格の取得
 
 ## 8.実装内容
