@@ -7,8 +7,24 @@
 * ユーザ情報の取得、登録、更新、削除
 * JUnitによるテストコードの実装
 * CIの実装
-  * Checkstyle
-  * Discordへ結果通知
+    * Checkstyle
+    * Discordへ結果通知
+
+### ユーザー登録
+
+ <img src="image/registeruser.gif" width="75%"/>
+
+### ユーザー検索(id)
+
+ <img src="image/searchuser.gif" width="75%"/>
+
+### ユーザー編集
+
+ <img src="image/updateduser.gif" width="75%"/>
+
+### ユーザー削除
+
+ <img src="image/deleteuser.gif" width="75%"/>
 
 ### アプリケーション概略図
 
@@ -19,22 +35,27 @@
 * Java 17.0.6
 * Spring Boot 3.0.6
 * O/R Mapper
-  * MyBatis 3.0.0
+    * MyBatis 3.0.0
 * Docker
-  * MySQL 8.0.33
+    * MySQL 8.0.33
 
 ## 3.起動手順
 
-* リポジトリをgit cloneします
-  `git clone https://github.com/ryo-mk/work9.git`
+* リポジトリをgit cloneします  
+  `git clone https://github.com/ryo-mk/USERAPI`
 * Dockerを起動し、ターミナルで以下のコマンドを実行します。  
   `docker compose up`
-
-* `src/main/java/com/example/work9`配下にある
-  `Work09Application.java`クラスを実行します。
-
+* `src/main/java/com/example/users`配下にある
+  `UsersApplication.java`クラスを実行します。
 * Postmanを起動し、実行したい操作に応じてHTTPメソッドの選択、URLの入力、
   リクエストボディの入力を行います。
+
+* userfrontendディレクトリに移動する。  
+  `cd userfrontend/`
+
+* 依存関係をインストールし、Reactのアプリケーションを起動する。  
+  `npm install`
+  `npm start`
 
 ## 4.API仕様書
 
